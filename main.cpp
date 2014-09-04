@@ -39,22 +39,10 @@ bool manageEndSession()
 	}
 }
 
-// void test()
-// {
-// 	cella celle[3][3];
-// 
-// 	celle[0][0] = 
-// 	griglia grid;
-// 
-// 	
-// }
 
 int main(int argc, char **argv) {
 
 		system("clear");
-
-// 		test();
-// 		return 0;
 
 		std::cout << std::endl << "GIOCO DEL TRIS" << std::endl;
 

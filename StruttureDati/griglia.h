@@ -9,7 +9,6 @@ class griglia
 {
 public:
 	griglia();
-	//griglia();
 	virtual ~griglia(){};
 
 	void print();
@@ -20,11 +19,6 @@ public:
 	bool isFilled();
 	bool isAnyTris();
 
-	bool tryToWin(simboli_t symb, int & winnerRow, int & winnerColumn);
-
-
-	bool tryNoLose(simboli_t symb, int & winnerRow, int & winnerColumn);
-
 	bool firstEmptyCell(int & row, int & col);
 
 private:
@@ -33,12 +27,6 @@ private:
 	bool isAnyRowTris();
 	bool isAnyColumnTris();
 	bool isAnyDiagonalTris();
-
-	bool tryWinnerRowBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
-	bool tryWinnerColumnBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
-
-	bool tryWinnerMainDiagonalBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
-	bool tryWinnerSecondaryDiagonalBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
 
 	cella celle[MATRIX_DIM][MATRIX_DIM];
 };
