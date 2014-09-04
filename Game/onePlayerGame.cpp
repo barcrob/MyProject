@@ -153,11 +153,11 @@ void onePlayerGame::calcolaMossa(simboli_t symb)
 	
 	int row(0), col(0);
 
-	if(tryToWin(_grid, symb, row, col))
+	if(tryToWin(symb, row, col))
 	{
 		std::cout << "calcolaMossa trovata mossa vincente su cella (" << row << ","<< col << ")" << std::endl;
 	}
-	else if(tryNoLose(_grid, symb, row, col))
+	else if(tryNoLose(symb, row, col))
 	{
 		std::cout << "calcolaMossa trovata mossa vincente per l'avversario su cella (" << row << ","<< col << ")" << std::endl;
 	}

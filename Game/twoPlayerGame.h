@@ -3,9 +3,10 @@
 
 #include "simboli.h"
 #include "IGame.h"
+#include "GameBase.h"
 
 
-class twoPlayerGame: public IGame
+class twoPlayerGame: public IGame, public GameBase
 {
 public:
 	twoPlayerGame();
