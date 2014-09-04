@@ -2,6 +2,7 @@
 #include "onePlayerGame.h"
 
 #include <readUtility.h>
+#include "GameFactory.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -45,11 +46,10 @@ int main(int argc, char **argv) {
 		system("clear");
 
 		std::cout << std::endl << "GIOCO DEL TRIS" << std::endl;
-
 		std::cout << std::endl << "Premere invio per iniziare una partita" << std::endl;
 
 		char string[256];
-		
+
 		gets(string);
 
 		bool terminateSession = false;
@@ -58,13 +58,18 @@ int main(int argc, char **argv) {
 		{
 			system("clear");
 
-			onePlayerGame game;
+			std::cout << std::endl << "Inserire il numero di giocatori (1,2)" << std::endl;
+
+			int playerNum;
+			readUtility::safeReadInt(playerNum);
+
+			IGame* game = GameFactory::createGame(playerNum);
 
 			std::cout << "INIZIO PARTITA" << std::endl << std::endl;
-
-			game.play();
-
+			game->play();
 			terminateSession = manageEndSession();
+
+			delete game;
 		}
 
     return 0;

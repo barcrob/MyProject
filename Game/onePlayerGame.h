@@ -16,6 +16,7 @@ public:
 
 private:
 	void calcolaMossa(simboli_t symb);
+	static int _count;
 };
 
 #endif // ONEPLAYERGAME_H

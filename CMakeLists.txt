@@ -22,5 +22,5 @@ file(GLOB Game_H Game/*.h)
 
 qt4_automoc(${StruttureDati_CPP} ${Utility_CPP} ${Game_CPP})
 
-add_executable(${PROJECT_NAME} main.cpp ${StruttureDati_CPP} ${Utility_CPP} ${Game_CPP})
+add_executable(${PROJECT_NAME} main.cpp GameFactory.cpp ${StruttureDati_CPP} ${Utility_CPP} ${Game_CPP})
 target_link_libraries(${PROJECT_NAME} ${QT_QTCORE_LIBRARY})

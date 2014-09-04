@@ -4,14 +4,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int onePlayerGame::_count = 0;
+
 onePlayerGame::onePlayerGame()
 {
-
+	std::cout << "Costruttore onePlayerGame count = " << ++_count << std::endl;
 }
 
 onePlayerGame::~onePlayerGame()
 {
-
+	std::cout << "Distruttore onePlayerGame count = " << --_count << std::endl;
 }
 
 void onePlayerGame::play()

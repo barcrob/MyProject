@@ -5,14 +5,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int twoPlayerGame::_count = 0;
+
 twoPlayerGame::twoPlayerGame()
 {
-
+	std::cout << "Costruttore twoPlayerGame count = " << ++_count << std::endl;
 }
 
 twoPlayerGame::~twoPlayerGame()
 {
-
+	std::cout << "Distruttore twoPlayerGame count = " << --_count << std::endl;
 }
 
 void twoPlayerGame::play()

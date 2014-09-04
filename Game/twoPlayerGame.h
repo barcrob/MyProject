@@ -13,6 +13,9 @@ public:
 	virtual ~twoPlayerGame();
 
 	void play();
+
+private:
+		static int _count;
 };
 
 #endif // TWOPLAYERGAME_H
