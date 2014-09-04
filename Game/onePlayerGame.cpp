@@ -1,5 +1,4 @@
 #include "onePlayerGame.h"
-#include "readUtility.h"
 
 #include <iostream>
 #include <stdlib.h>
@@ -68,86 +67,7 @@ void onePlayerGame::play()
 		}
 }
 
-bool onePlayerGame::leggiCoordinata(int & coord, coordinateType_t type)
-{
-		bool validValue = false;
-
-		while(!validValue)
-		{
-			std::string coordinata = (type == rowType)? "riga" : "colonna" ;
-			std::cout << "Inserire il numero di " << coordinata << " :" << std::endl;
-			std::cout << "1)" << std::endl;
-			std::cout << "2)" << std::endl;
-			std::cout << "3)" << std::endl;
-			std::cout << "4) Per uscire dalla partita" << std::endl;
-
-			if(readUtility::safeReadInt(coord))
-			{
-				if(coord == 4)
-				{
-					return false;
-				}
-				else if(coord>0 && coord<=MATRIX_DIM)
-				{
-					validValue = true;
-					return true;
-				}
-				else
-				{
-					std::cout << "Valore non valido, riprovare" << std::endl;
-				}
-			}
-			else
-			{
-				std::cout << "Valore non valido, riprovare" << std::endl;
-			}
-		}
-}
-
-// void onePlayerGame::virtualPlayerChoice()
-// {
-// 	tryToWin();
-// 
-// 	playDefense();
-// }
-
-// void onePlayerGame::tryToWin()
-// {
-// 
-// }
-
-bool onePlayerGame::inserisciMossa(const simboli_t simbolo)
-{
-	bool mossaValida = false;
-
-	while(!mossaValida)
-	{
-		std::cout << "Inserisci le coordinate della cella:" << std::endl << std::endl;
-
-		int row = 0;
-
-		if(!leggiCoordinata(row, rowType))
-			return false;
-
-		int col = 0;
-
-		if(!leggiCoordinata(col, columnType))
-			return false;
-
-		mossaValida = _grid.setSymbol(row-1, col-1, simbolo);
-
-		if(!mossaValida)
-		{
-			//Ristampo la griglia per dare la possibilità al giocatore di capire meglio
-			//dove ha sbagliato e ripetere la selezione
-			_grid.print();
-		}
-	}
-
-	return true;
-}
-
-void onePlayerGame::calcolaMossa(simboli_t symb)
+void onePlayerGame::calcolaMossa(const simboli_t symb)
 {
 	std::cout << "calcolaMossa" << std::endl;
 	

@@ -1,5 +1,4 @@
 #include "twoPlayerGame.h"
-#include "readUtility.h"
 
 
 #include <iostream>
@@ -60,70 +59,4 @@ void twoPlayerGame::play()
 
 			giocatore1 = !giocatore1;
 		}
-}
-
-bool twoPlayerGame::leggiCoordinata(int & coord, coordinateType_t type)
-{
-		bool validValue = false;
-
-		while(!validValue)
-		{
-			std::string coordinata = (type == rowType)? "riga" : "colonna" ;
-			std::cout << "Inserire il numero di " << coordinata << " :" << std::endl;
-			std::cout << "1)" << std::endl;
-			std::cout << "2)" << std::endl;
-			std::cout << "3)" << std::endl;
-			std::cout << "4) Per uscire dalla partita" << std::endl;
-
-			if(readUtility::safeReadInt(coord))
-			{
-				if(coord == 4)
-				{
-					std::cout << "Primo ramo if" << std::endl;
-					return false;
-				}
-				else if(coord>0 && coord<=MATRIX_DIM)
-				{
-					std::cout << "Secondo ramo if" << std::endl;
-					validValue = true;
-					return true;
-				}
-				else
-				{
-					std::cout << "ramo else" << std::endl;
-					std::cout << "Valore non valido, riprovare" << std::endl;
-				}
-			}
-			else
-			{
-				std::cout << "ramo else" << std::endl;
-				std::cout << "Valore non valido, riprovare" << std::endl;
-			}
-		}
-}
-
-bool twoPlayerGame::inserisciMossa(const simboli_t simbolo)
-{
-	bool mossaValida = false;
-
-	while(!mossaValida)
-	{
-		std::cout << "Inserisci le coordinate della cella:" << std::endl << std::endl;
-
-		int row = 0;
-
-		if(!leggiCoordinata(row, rowType))
-			return false;
-
-		int col = 0;
-
-		if(!leggiCoordinata(col, columnType))
-			return false;
-
-		mossaValida = _grid.setSymbol(row-1, col-1, simbolo);
-
-		if(!mossaValida) _grid.print();
-	}
-
-	return true;
 }

@@ -15,8 +15,6 @@ public:
 	void play();
 
 private:
-	bool leggiCoordinata(int & coord, coordinateType_t type);
-	bool inserisciMossa(const simboli_t simbolo);
 	void calcolaMossa(simboli_t symb);
 };
 

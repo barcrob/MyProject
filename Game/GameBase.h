@@ -23,7 +23,12 @@ class GameBase
 		bool tryWinnerMainDiagonalBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
 		bool tryWinnerSecondaryDiagonalBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
 
+	private:
+		bool leggiCoordinata(int & coord, coordinateType_t type);
+	
 	protected:
+		bool inserisciMossa(simboli_t simbolo);
+
 		griglia _grid;
 };
 
