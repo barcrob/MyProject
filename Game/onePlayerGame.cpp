@@ -1,4 +1,5 @@
 #include "onePlayerGame.h"
+#include <GameCache.h>
 
 #include <iostream>
 #include <stdlib.h>
@@ -75,6 +76,23 @@ void onePlayerGame::calcolaMossa(const simboli_t symb)
 	
 	int row(0), col(0);
 
+	//Provo a vedere se la situazione di gioco è già presente in cache
+	QString key = _grid.serialize();
+	std::pair<int, int> choice;
+
+	if(GameCache::getChoice(key, choice))
+	{
+		//Se la situazione di gioco è presente in cache prelevo la mossa
+		//in essa contenuta
+		std::cout << "mossa prelevata dalla cache" << std::endl;
+
+		row = choice.first;
+		col = choice.second;
+
+		_grid.setSymbol(row, col, symb);
+		return;
+	}
+
 	if(tryToWin(symb, row, col))
 	{
 		std::cout << "calcolaMossa trovata mossa vincente su cella (" << row << ","<< col << ")" << std::endl;
@@ -92,4 +110,44 @@ void onePlayerGame::calcolaMossa(const simboli_t symb)
 	}
 	
 	_grid.setSymbol(row, col, symb);
+}
+
+/*
+ *	Override del metodo della classe GameBase
+ */
+bool onePlayerGame::inserisciMossa(simboli_t simbolo)
+{
+	bool mossaValida = false;
+
+	Griglia invertedGrid = _grid.invert();
+
+	while(!mossaValida)
+	{
+		std::cout << "Inserisci le coordinate della cella:" << std::endl << std::endl;
+
+		int row = 0;
+
+		if(!leggiCoordinata(row, rowType))
+			return false;
+
+		int col = 0;
+
+		if(!leggiCoordinata(col, columnType))
+			return false;
+
+		mossaValida = _grid.setSymbol(row-1, col-1, simbolo);
+
+		if(!mossaValida)
+		{
+			_grid.print();
+		}
+ 		else
+		{
+			GameCache::insertInCache(invertedGrid.serialize(), std::pair<int, int>(row-1, col-1));
+		}
+ 			//_mosseCache[invertedGrid.serialize()] = std::pair<int, int>(row-1, col-1);
+		//std::cout << "string della griglia = : '" << _grid.serialize().toStdString() << "'" << std::endl;
+	}
+
+	return true;
 }

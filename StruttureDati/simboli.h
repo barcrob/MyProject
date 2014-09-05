@@ -12,6 +12,7 @@ class symbolHandler
 {
 public:
 	static simboli_t enemySymbol(simboli_t symb);
+	static char toChar(simboli_t symb);
 };
 
 #endif

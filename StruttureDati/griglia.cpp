@@ -3,12 +3,12 @@
 #include <iostream>
 #include <stdlib.h>
 
-griglia::griglia()
+Griglia::Griglia()
 {
 	clear();
 }
 
-void griglia::clear()
+void Griglia::clear()
 {
 	for(int i=0;i<MATRIX_DIM;i++)
 	{
@@ -17,7 +17,7 @@ void griglia::clear()
 	}
 }
 
-void griglia::print(){
+void Griglia::print(){
 	
 	std::cout << std::endl;
 
@@ -37,12 +37,12 @@ void griglia::print(){
 	std::cout << " -------------" << std::endl;
 }
 
-bool griglia::checkRange(int row, int col)
+bool Griglia::checkRange(int row, int col)
 {
 	return (row>=0 && row<MATRIX_DIM) && (col>=0 && col<MATRIX_DIM);
 }
 
-bool griglia::setSymbol(int row, int col, simboli_t simb)
+bool Griglia::setSymbol(int row, int col, simboli_t simb)
 {
 	if(checkRange(row, col))
 	{
@@ -56,7 +56,7 @@ bool griglia::setSymbol(int row, int col, simboli_t simb)
 	}
 }
 
-simboli_t griglia::getSymbol(int row, int col)
+simboli_t Griglia::getSymbol(int row, int col)
 {
 	if(checkRange(row, col))
 	{
@@ -70,7 +70,7 @@ simboli_t griglia::getSymbol(int row, int col)
 	}
 }
 
-bool griglia::isFilled()
+bool Griglia::isFilled()
 {
 	for(int i=0;i<MATRIX_DIM;i++)
 	{
@@ -84,7 +84,7 @@ bool griglia::isFilled()
 	return true;
 }
 
-bool griglia::isAnyRowTris()
+bool Griglia::isAnyRowTris()
 {
 	for(int i=0;i<MATRIX_DIM;i++)
 	{
@@ -106,7 +106,7 @@ bool griglia::isAnyRowTris()
 	return false;
 }
 
-bool griglia::isAnyColumnTris()
+bool Griglia::isAnyColumnTris()
 {
 	for(int j=0;j<MATRIX_DIM;j++)
 	{
@@ -128,7 +128,7 @@ bool griglia::isAnyColumnTris()
 	return false;
 }
 
-bool griglia::isAnyDiagonalTris()
+bool Griglia::isAnyDiagonalTris()
 {
 	simboli_t simboloCentrale = celle[1][1].getSimbolo();
 
@@ -150,12 +150,12 @@ bool griglia::isAnyDiagonalTris()
 	return false;
 }
 
-bool griglia::isAnyTris()
+bool Griglia::isAnyTris()
 {
 	return isAnyRowTris() || isAnyColumnTris() || isAnyDiagonalTris();
 }
 
-bool griglia::firstEmptyCell(int& row, int& col)
+bool Griglia::firstEmptyCell(int& row, int& col)
 {
 	std::cout << "firstEmptyCell" << std::endl;
 	
@@ -175,4 +175,44 @@ bool griglia::firstEmptyCell(int& row, int& col)
 	}
 
 	return false;
+}
+
+/*
+ *	restituisce una Qstring che è la concatenazione dei simboli contenuti nella griglia
+ */
+QString Griglia::serialize()
+{
+	std::cout << "serialize" << std::endl;
+
+	QString result;
+	
+	for(int i=0;i<MATRIX_DIM;i++)
+	{
+		for(int j=0;j<MATRIX_DIM;j++)
+		{
+			result.append(QChar(symbolHandler::toChar(getSymbol(i,j))));
+		}
+	}
+
+	std::cout << "serialize result = " << result.toStdString() << std::endl;
+	
+	return result;
+}
+
+/*
+ *	Restituisce una griglia contenente i simboli invertiti
+ */
+Griglia Griglia::invert()
+{
+	Griglia invertedGrid;
+
+	for(int i=0;i<MATRIX_DIM;i++)
+	{
+		for(int j=0;j<MATRIX_DIM;j++)
+		{
+			invertedGrid.setSymbol(i, j, symbolHandler::enemySymbol(this->getSymbol(i,j)));
+		}
+	}
+
+	return invertedGrid;
 }

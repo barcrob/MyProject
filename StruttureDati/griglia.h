@@ -2,14 +2,15 @@
 #define GRIGLIA_H
 
 #include "cella.h"
+#include <QString>
 
 #define MATRIX_DIM 3
 
-class griglia
+class Griglia
 {
 public:
-	griglia();
-	virtual ~griglia(){};
+	Griglia();
+	virtual ~Griglia(){};
 
 	void print();
 	//void printDebug();
@@ -18,8 +19,10 @@ public:
 
 	bool isFilled();
 	bool isAnyTris();
-
 	bool firstEmptyCell(int & row, int & col);
+
+	QString serialize();
+	Griglia invert();
 
 private:
 	bool checkRange(int row, int col);

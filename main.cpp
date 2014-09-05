@@ -1,8 +1,9 @@
 #include "twoPlayerGame.h"
 #include "onePlayerGame.h"
+#include "GameFactory.h"
 
 #include <readUtility.h>
-#include "GameFactory.h"
+#include <GameCache.h>
 
 #include <iostream>
 #include <stdio.h>
@@ -37,6 +38,22 @@ bool manageEndSession()
 		{
 			std::cout << "Risposta non valida ripetere la selezione" << std::endl;
 		}
+	}
+}
+
+void cacheTest()
+{
+	Griglia g1;
+	g1.setSymbol(1,1, cerchio);
+	g1.setSymbol(1,2, croce);
+	GameCache::insertInCache(g1.serialize(), std::pair<int, int>(2, 2));
+
+	std::pair<int, int> choice;
+	
+	if(GameCache::getChoice(g1.serialize(), choice))
+	{
+		std::cout << std::endl << "row in cache = " << choice.first << std::endl;
+		std::cout << std::endl << "col in cache = " << choice.second << std::endl;
 	}
 }
 

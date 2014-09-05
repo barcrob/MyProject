@@ -22,14 +22,12 @@ class GameBase
 		bool tryWinnerColumnBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
 		bool tryWinnerMainDiagonalBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
 		bool tryWinnerSecondaryDiagonalBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn);
-
-	private:
-		bool leggiCoordinata(int & coord, coordinateType_t type);
 	
 	protected:
 		bool inserisciMossa(simboli_t simbolo);
+		bool leggiCoordinata(int & coord, coordinateType_t type);
 
-		griglia _grid;
+		Griglia _grid;
 };
 
 #endif // GAMEBASE_H
