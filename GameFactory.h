@@ -3,10 +3,12 @@
 
 #include "IGame.h"
 
+class IGameView;
+
 class GameFactory
 {
 public:
-	static IGame* createGame(int gameType);
+	static IGame* createGame(GameManager & game, int gameType);
 };
 
 #endif //GAMEFACTOTY_H

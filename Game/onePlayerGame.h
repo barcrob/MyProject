@@ -2,27 +2,40 @@
 #define ONEPLAYERGAME_H
 
 #include "simboli.h"
+
 #include "IGame.h"
 #include "GameBase.h"
-#include <QHash>
 
+class GameManager;
+class IGameView;
 
-class onePlayerGame: public IGame, public GameBase
+class onePlayerGame: public GameBase
 {
+	Q_OBJECT
+
 	public:
-		onePlayerGame();
+		onePlayerGame(GameManager & manager);
 		virtual ~onePlayerGame();
 
 		void play();
 
+		bool startGame();
+		bool stopGame();
+
 	protected:
 		bool inserisciMossa(simboli_t simbolo);
 
-	private:
-		void calcolaMossa(simboli_t symb);
+	private Q_SLOTS:
+		void cellSelectedSlot(int row, int col);
 
+	private:
+		bool isGameFinished();
+		void calcolaMossa(const simboli_t symb);
+		void calcolaMossa();
+
+		simboli_t _simboloCorrente;
+		bool _giocatore1;
 		static int _count;
-		//QHash<QString, std::pair<int, int> > _mosseCache;
 };
 
 #endif // ONEPLAYERGAME_H

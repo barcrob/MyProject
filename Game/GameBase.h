@@ -3,16 +3,21 @@
 
 #include "griglia.h"
 
+#include "IGame.h"
+
+class IGameView;
+class GameManager;
+
 typedef enum
 {
 	rowType,
 	columnType
 }coordinateType_t;
 
-class GameBase
+class GameBase: public IGame
 {
 	public:
-		GameBase();
+		GameBase(GameManager & manager);
 		virtual ~GameBase();
 
 		bool tryToWin(simboli_t symb, int & winnerRow, int & winnerColumn);
@@ -28,6 +33,7 @@ class GameBase
 		bool leggiCoordinata(int & coord, coordinateType_t type);
 
 		Griglia _grid;
+		IGameView* _gameView;
 };
 
 #endif // GAMEBASE_H

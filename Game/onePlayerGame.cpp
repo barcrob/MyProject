@@ -1,22 +1,64 @@
 #include "onePlayerGame.h"
+
 #include <GameCache.h>
+#include <IGameView.h>
+#include <GameGridView.h>
+#include <GameManager.h>
 
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QMessageBox>
+
+using namespace std;
+
+#define WIN_GRID_WITDH 300
+#define WIN_GRID_HEIGHT 300
 
 int onePlayerGame::_count = 0;
 
-onePlayerGame::onePlayerGame()
+onePlayerGame::onePlayerGame(GameManager & manager):
+GameBase(manager),
+_simboloCorrente(vuota),
+_giocatore1(true)
 {
-	std::cout << "Costruttore onePlayerGame count = " << ++_count << std::endl;
+	std::cout << "onePlayerGame Costruttore count = " << ++_count << std::endl;
+
+	QRectF dim(0,0,WIN_GRID_WITDH, WIN_GRID_HEIGHT );
+
+	_gameView = new GameGridView(dim);
+	_gameView->setGeometry(0, QApplication::desktop()->screenGeometry().height()-WIN_GRID_HEIGHT, WIN_GRID_WITDH, WIN_GRID_HEIGHT);
 }
 
 onePlayerGame::~onePlayerGame()
 {
-	std::cout << "Distruttore onePlayerGame count = " << --_count << std::endl;
+	std::cout << "onePlayerGame Distruttore count = " << --_count << std::endl;
 }
 
+bool onePlayerGame::startGame()
+{
+	std::cout << "onePlayerGame startGame" << std::endl;
+	
+	connect(_gameView, SIGNAL(cellSelected(int, int)), this, SLOT(cellSelectedSlot(int, int)));
+	_gameView->show();
+
+	return true;
+}
+
+bool onePlayerGame::stopGame()
+{
+	std::cout << "onePlayerGame::stopGame" << std::endl << std::endl;
+
+	_gameView->hide();
+	disconnect(_gameView, SIGNAL(cellSelected(int, int)), this, SLOT(cellSelectedSlot(int, int)));
+
+	_gameView->deleteLater();
+
+	return true;
+}
+/*
 void onePlayerGame::play()
 {
 		simboli_t simbolo;
@@ -70,6 +112,7 @@ void onePlayerGame::play()
 		}
 }
 
+
 void onePlayerGame::calcolaMossa(const simboli_t symb)
 {
 	std::cout << "calcolaMossa" << std::endl;
@@ -105,16 +148,18 @@ void onePlayerGame::calcolaMossa(const simboli_t symb)
 	{
 		if(!_grid.firstEmptyCell(row, col))
 		{
-			std::cout << "calcolaMossa ATTENZIONE non ho trovato nessauna cella vuota" << std::endl;
+			std::cout << "calcolaMossa ATTENZIONE non ho trovato nessuna cella vuota" << std::endl;
 		}
 	}
 	
 	_grid.setSymbol(row, col, symb);
 }
+*/
 
 /*
  *	Override del metodo della classe GameBase
  */
+/*
 bool onePlayerGame::inserisciMossa(simboli_t simbolo)
 {
 	bool mossaValida = false;
@@ -150,4 +195,120 @@ bool onePlayerGame::inserisciMossa(simboli_t simbolo)
 	}
 
 	return true;
+}
+*/
+
+void onePlayerGame::cellSelectedSlot(int row, int col)
+{
+	cout << "onePlayerGame: cellSelectedSlot" << endl;
+
+	if(!_giocatore1)
+	{
+		cout << "onePlayerGame: ATTENZIONE ERRORE in cellSelectedSlot" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	if(!_grid.setSymbol(row, col, cerchio))
+	{
+		cout << "onePlayerGame: ATTENZIONE ERRORE in setSymbol" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	_gameView->setSymbol(row, col, QString("O"));
+
+	if(isGameFinished())
+	{
+		gameFinished();
+		return;
+	}
+	
+	_giocatore1 = !_giocatore1;
+	calcolaMossa();
+}
+
+bool onePlayerGame::isGameFinished()
+{
+	if(_grid.isAnyTris())
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Hai vinto");
+		//TODO: provare centramento box
+		QSize size = msgBox.size();
+		float msgBoxX = _gameView->x()+(_gameView->width()-size.width())/2;
+		float msgBoxY = _gameView->y()+(_gameView->height()-size.height())/2;
+		msgBox.setGeometry(msgBoxX , msgBoxY, msgBox.width(), msgBox.height() );
+		msgBox.exec();
+		return true;
+	}
+	else if(_grid.isFilled())
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Partita finita in parità");
+
+		QSize size = msgBox.size();
+		float msgBoxX = _gameView->x()+(_gameView->width()-size.width())/2;
+		float msgBoxY = _gameView->y()+(_gameView->height()-size.height())/2;
+		msgBox.setGeometry(msgBoxX , msgBoxY, msgBox.width(), msgBox.height() );
+		
+		msgBox.exec();
+		return true;
+	}
+
+	return false;
+}
+
+void onePlayerGame::calcolaMossa()
+{
+	cout << "onePlayerGame: calcolaMossa" << endl;
+	
+	int row(0), col(0);
+
+	if(_giocatore1)
+	{
+		cout << "onePlayerGame: ATTENZIONE ERRORE in calcolaMossa" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	bool win = false;
+	
+	if(tryToWin(croce, row, col))
+	{
+		std::cout << "calcolaMossa trovata mossa vincente su cella (" << row << ","<< col << ")" << std::endl;
+		win = true;
+	}
+	else if(tryNoLose(croce, row, col))
+	{
+		std::cout << "calcolaMossa trovata mossa vincente per l'avversario su cella (" << row << ","<< col << ")" << std::endl;
+	}
+	else
+	{
+		if(!_grid.firstEmptyCell(row, col))
+		{
+			std::cout << "calcolaMossa ATTENZIONE ERROR non ho trovato nessuna cella vuota" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	_grid.setSymbol(row, col, croce);
+	_gameView->setSymbol(row, col, QString("X"));
+
+	if(win)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Game Over");
+
+		QSize size = msgBox.size();
+		float msgBoxX = _gameView->x()+(_gameView->width()-size.width())/2;
+		float msgBoxY = _gameView->y()+(_gameView->height()-size.height())/2;
+		msgBox.setGeometry(msgBoxX , msgBoxY, msgBox.width(), msgBox.height() );
+
+		msgBox.exec();
+		
+		gameFinished();
+		return;
+	}
+
+	_giocatore1 = !_giocatore1;
+
+	std::cout << endl << endl;
 }

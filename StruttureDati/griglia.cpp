@@ -167,7 +167,7 @@ bool Griglia::firstEmptyCell(int& row, int& col)
 			{
 				row = i;
 				col = j;
-				std::cout << "firstEmptyCell row = " << row << "col = " << col << std::endl;
+				std::cout << "firstEmptyCell: row = " << row << " col = " << col << std::endl;
 
 				return true;
 			}

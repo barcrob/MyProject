@@ -3,7 +3,9 @@
 
 #include <iostream>
 
-GameBase::GameBase()
+GameBase::GameBase(GameManager & manager):
+IGame(manager),
+_gameView(NULL)
 {
 
 }
@@ -15,33 +17,33 @@ GameBase::~GameBase()
 
 bool GameBase::tryToWin(simboli_t symb, int& winnerRow, int& winnerColumn)
 {
-	std::cout << "tryToWin" << std::endl;
+	//std::cout << "tryToWin" << std::endl;
 
 	if(tryWinnerRowBySimbol(symb, winnerRow, winnerColumn))
 	{
-		std::cout << "tryToWin trovata mossa vincente su riga: " << winnerRow << std::endl;
+		//std::cout << "tryToWin trovata mossa vincente su riga: " << winnerRow << std::endl;
 		return true;
 	}
 
 	if(tryWinnerColumnBySimbol(symb, winnerRow, winnerColumn))
 	{
-		std::cout << "tryToWin trovata mossa vincente su colonna: " << winnerColumn << std::endl;
+		//std::cout << "tryToWin trovata mossa vincente su colonna: " << winnerColumn << std::endl;
 		return true;
 	}
 
 	if(tryWinnerMainDiagonalBySimbol(symb, winnerRow, winnerColumn))
 	{
-		std::cout << "tryToWin trovata mossa vincente sulla diagonale principale" << std::endl;
+		//std::cout << "tryToWin trovata mossa vincente sulla diagonale principale" << std::endl;
 		return true;
 	}
 
 	if(tryWinnerSecondaryDiagonalBySimbol(symb, winnerRow, winnerColumn))
 	{
-		std::cout << "tryToWin trovata mossa vincente sulla diagonale principale" << std::endl;
+		//std::cout << "tryToWin trovata mossa vincente sulla diagonale principale" << std::endl;
 		return true;
 	}
 
-	std::cout << "tryToWin nessuna mossa vincente trovata" << std::endl;
+	//std::cout << "tryToWin nessuna mossa vincente trovata" << std::endl;
 
 	return false;
 }
@@ -84,7 +86,7 @@ bool GameBase::tryWinnerRowBySimbol(simboli_t symb, int & winnerRow, int & winne
 		{
 			winnerRow = rowIndex;
 			winnerColumn = columnIndex;
-			std::cout << "tryWinnerRowBySimbol TROVATA UNA MOSSA VINCENTE NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
+			//std::cout << "tryWinnerRowBySimbol TROVATA UNA MOSSA VINCENTE NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
 			return true;
 		}
 	}
@@ -124,7 +126,7 @@ bool GameBase::tryWinnerColumnBySimbol(simboli_t symb, int & winnerRow, int & wi
 		{
 			winnerRow = rowIndex;
 			winnerColumn = columnIndex;
-			std::cout << "tryWinnerColumnBySimbol MOSSA VINCENTE CON SIMBOLO NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
+			//std::cout << "tryWinnerColumnBySimbol MOSSA VINCENTE CON SIMBOLO NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
 			return true;
 		}
 	}
@@ -134,7 +136,7 @@ bool GameBase::tryWinnerColumnBySimbol(simboli_t symb, int & winnerRow, int & wi
 
 bool GameBase::tryWinnerMainDiagonalBySimbol(simboli_t symb, int & winnerRow, int & winnerColumn)
 {
-	std::cout << "tryWinnerMainDiagonalBySimbol" << std::endl;
+	//std::cout << "tryWinnerMainDiagonalBySimbol" << std::endl;
 
 	int symbCount = 0;
 	bool isMissingCellFree = false;
@@ -162,7 +164,7 @@ bool GameBase::tryWinnerMainDiagonalBySimbol(simboli_t symb, int & winnerRow, in
 	{
 		winnerRow = rowIndex;
 		winnerColumn = columnIndex;
-		std::cout << "tryWinnerMainDiagonalBySimbol MOSSA VINCENTE CON SIMBOLO NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
+		//std::cout << "tryWinnerMainDiagonalBySimbol MOSSA VINCENTE CON SIMBOLO NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
 		return true;
 	}
 
@@ -198,7 +200,7 @@ bool GameBase::tryWinnerSecondaryDiagonalBySimbol(simboli_t symb, int & winnerRo
 	{
 		winnerRow = rowIndex;
 		winnerColumn = columnIndex;
-		std::cout << "tryWinnerSecondaryDiagonalBySimbol MOSSA VINCENTE CON SIMBOLO NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
+		//std::cout << "tryWinnerSecondaryDiagonalBySimbol MOSSA VINCENTE CON SIMBOLO NELLA CELLA (" << winnerRow+1 << "," << winnerColumn+1 << ")" << std::endl;
 		return true;
 	}
 
@@ -207,7 +209,7 @@ bool GameBase::tryWinnerSecondaryDiagonalBySimbol(simboli_t symb, int & winnerRo
 
 bool GameBase::tryNoLose(simboli_t symb, int & row, int & column)
 {
-	std::cout << "tryNoLose" << std::endl;
+	//std::cout << "tryNoLose" << std::endl;
 
 	simboli_t enemySymb = symbolHandler::enemySymbol(symb);
 

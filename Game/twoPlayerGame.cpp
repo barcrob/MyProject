@@ -1,4 +1,5 @@
 #include "twoPlayerGame.h"
+#include "GameManager.h"
 
 
 #include <iostream>
@@ -7,7 +8,8 @@
 
 int twoPlayerGame::_count = 0;
 
-twoPlayerGame::twoPlayerGame()
+twoPlayerGame::twoPlayerGame(GameManager & gameView):
+GameBase(gameView)
 {
 	std::cout << "Costruttore twoPlayerGame count = " << ++_count << std::endl;
 }
