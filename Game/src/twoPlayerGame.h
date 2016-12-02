@@ -13,15 +13,20 @@ public:
 	twoPlayerGame(GameManager & manager);
 	virtual ~twoPlayerGame();
 
-	virtual  void play();
+	void play();
 	//TODO: implementare per allineare la logica a onePlayer
-	virtual bool startGame(){};
-	virtual bool stopGame(){};
-	virtual void setSymbol(int row, int col, const QString symbol){};
-	virtual const QString getSymbol(int row, int col) const{};
+	bool start(){};
+	bool stop(){};
+	void setSymbol(int row, int col, const QString symbol){};
+	const QString getSymbol(int row, int col) const{};
+	
+
 
 private:
-		static int _count;
+	bool connectUiEvents();
+	bool disconnectUiEvents();
+	
+	static int _count;
 };
 
 #endif // TWOPLAYERGAME_H

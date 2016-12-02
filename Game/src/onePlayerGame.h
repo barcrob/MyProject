@@ -5,6 +5,7 @@
 
 #include "IGame.h"
 #include "GameBase.h"
+#include <QTimer>
 
 class GameManager;
 class IGameView;
@@ -17,25 +18,23 @@ class onePlayerGame: public GameBase
 		onePlayerGame(GameManager & manager);
 		virtual ~onePlayerGame();
 
-		void play();
-
-		bool startGame();
-		bool stopGame();
-
-	protected:
-		bool inserisciMossa(simboli_t simbolo);
+		bool start();
+		bool stop();
 
 	private Q_SLOTS:
 		void cellSelectedSlot(int row, int col);
+		void timeoutSlot();
 
 	private:
+		bool connectUiEvents();
+		bool disconnectUiEvents();
+
 		bool isGameFinished();
-		void calcolaMossa(const simboli_t symb);
 		void calcolaMossa();
 
 		simboli_t _simboloCorrente;
-		bool _giocatore1;
 		static int _count;
+		QTimer _waitTimer;
 };
 
 #endif // ONEPLAYERGAME_H

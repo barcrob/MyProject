@@ -1,53 +1,38 @@
 #include "RoundedRectDecorator.h"
 
 #include <QString>
-#include <qpen.h>
+#include <QPen>
 #include <QPainter>
-#include <qstyleoption.h>
+#include <QStyleOptionGraphicsItem>
 
 #include <iostream>
 
 
-RoundedRectDecorator::RoundedRectDecorator(ICellItem* cell):
-ICellDecorator(cell)
+RoundedRectDecorator::RoundedRectDecorator(ICellItem* cell,  const QRectF & coord, int width, const QColor & color):
+DecoratorBase(cell, coord),
+_width(width),
+_color(color)
 {
-
 }
+
+RoundedRectDecorator::~RoundedRectDecorator()
+{
+}
+
 
 void RoundedRectDecorator::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	std::cout << "RoundedRectDecorator::paint" << std::endl;
-	
 	QPen pen;
-	pen.setWidth(3);
+	int penWitdh = abs(_width);
+	pen.setWidth(penWitdh);
+	pen.setBrush(_color);
+
+	qreal penWitdhHalf = _width/2;
 	painter->setPen(pen);
-	painter->drawRoundedRect(_cell->boundingRect(), 50.0, 50.0, Qt::RelativeSize);
-	ICellDecorator::paint(painter, option, widget);
-}
+	painter->drawRoundedRect(_cell->boundingRect().adjusted(penWitdhHalf, penWitdhHalf, -penWitdhHalf, -penWitdhHalf), 50.0, 50.0, Qt::RelativeSize);
 
-const QString RoundedRectDecorator::getSymbol() const
-{
-	if(_cell)
-		_cell->getSymbol();
+	DecoratorBase::paint(painter, option, widget);
 }
-
-void RoundedRectDecorator::setSymbol(const QString symbol)
-{
-	if(_cell)
-		_cell->setSymbol(symbol);
-}
-
-QRectF RoundedRectDecorator::boundingRect() const
-{
-	QRectF rect;
-	
-	if(_cell)
-		rect = _cell->boundingRect();
-	
-	return rect;
-	
-}
-
 
 
 

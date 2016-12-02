@@ -33,7 +33,7 @@ class GameBase: public IGame
 		bool leggiCoordinata(int & coord, coordinateType_t type);
 
 		Griglia _grid;
-		IGameView* _gameView;
+		IGameView & _gameView;
 };
 
 #endif // GAMEBASE_H

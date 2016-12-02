@@ -13,11 +13,12 @@ class IGame: public QObject
 		IGame(GameManager & gameManager);
 		virtual ~IGame();
 
-		virtual bool startGame() = 0;
-		virtual bool stopGame() = 0;
+		virtual bool start() = 0;
+		virtual bool stop() = 0;
 
 	Q_SIGNALS:
 		void gameFinished();
+		void symbolSelectedSignal(int row, int col, const QString & symbol);
 	
 	protected:
 		GameManager & _gameManager;

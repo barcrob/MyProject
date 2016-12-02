@@ -8,11 +8,12 @@
 
 #include <iostream>
 
+int CellGraphicItem::_count = 0;
+
 using namespace std;
 
 CellGraphicItem::CellGraphicItem(const QRectF & coord, int row, int col, const QString & symbol):
-QObject(),
-QGraphicsRectItem(coord),
+ICellItem(coord),
 _symbol(NULL),
 _row(row),
 _col(col)
@@ -21,18 +22,25 @@ _col(col)
 
 	float x = coord.x()+(boundingRect().width() -_symbol->boundingRect().width())/2;
 	float y = coord.y()+(boundingRect().height()-_symbol->boundingRect().height())/2;
-	
+
 	_symbol->setPos(x,y);
 
-	setBrush(QBrush(QColor(122,122,122,128)));
+	setBrush(QBrush(QColor(80,80,80,125)));
+
+	_count++;
+	cout << "create CellGraphicItem count = " << _count << endl;
 }
 
 CellGraphicItem::~CellGraphicItem()
 {
+	_count--;
+	cout << "destroy CellGraphicItem count = " << _count << endl;
 }
 
 void CellGraphicItem::setSymbol(const QString symbol)
 {
+	cout << "CellGraphicItem::setSymbol " << symbol.toStdString() << endl;
+
 	_symbol->setText(symbol);
 }
 
@@ -46,7 +54,7 @@ void CellGraphicItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
      if (event->button() == Qt::LeftButton) {
          // handle left mouse button here
 				cout << "CellGraphicItem::Il giocatore ha scelto la cella (" << _row << "," << _col << ")" << endl;
-				cellSelected(_row, _col);
+				cellSelectedSignal(_row, _col);
 				setAcceptedMouseButtons(0);
      } else {
          // pass on other buttons to base class
@@ -57,11 +65,8 @@ void CellGraphicItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 // void CellGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 // {
 // 	std::cout << "CellGraphicItem::paint" << std::endl;
-// 	
-// // 	QPen pen;
-// // 	pen.setWidth(2);
-// // 	painter->setPen(pen);
-// // 	painter->drawRoundedRect(boundingRect(), 50.0, 50.0, Qt::RelativeSize);
+// 
+// 	_symbol->paint(painter, option, widget);
 // 	QGraphicsRectItem::paint(painter, option, widget);
 // }
 

@@ -8,8 +8,8 @@
 
 int twoPlayerGame::_count = 0;
 
-twoPlayerGame::twoPlayerGame(GameManager & gameView):
-GameBase(gameView)
+twoPlayerGame::twoPlayerGame(GameManager & manager):
+GameBase(manager)
 {
 	std::cout << "Costruttore twoPlayerGame count = " << ++_count << std::endl;
 }
@@ -64,3 +64,15 @@ void twoPlayerGame::play()
 			giocatore1 = !giocatore1;
 		}
 }
+
+bool twoPlayerGame::connectUiEvents()
+{
+
+}
+
+bool twoPlayerGame::disconnectUiEvents()
+{
+
+}
+
+

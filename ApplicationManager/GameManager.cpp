@@ -1,21 +1,22 @@
 #include "GameManager.h"
 
-#include "../GameFactory.h"
+#include "GameFactory.h"
+#include "GameGridView.h"
 
 #include "MyDialog.h"
 
 #include <iostream>
-#include <QDesktopWidget>
 #include <QApplication>
 
 using namespace std;
 
-#define DIALOG_WITDH 200
-#define DIALOG_HEIGHT 100
+#define PLAYER1 "player1"
+#define PLAYER2 "player2"
 
 GameManager::GameManager():
 _dialog(NULL),
 _game(NULL),
+_gameView(NULL),
 _numPlayer(0),
 _isInizialized(false),
 _isStarted(false),
@@ -25,6 +26,7 @@ _gameStarted(false)
 
 GameManager::~GameManager()
 {
+	_playerMap.clear();
 }
 
 //NOTE: potrebbe essere raffinata per gestire anche gli altri livelli
@@ -32,7 +34,7 @@ bool GameManager::checkStartedStatus()
 {
 	if(!_isInizialized)
 	{
-		cout << "GameManager: already initialized" << endl;
+		cout << "ERROR GameManager: not initialized" << endl;
 		return false;
 	}
 
@@ -52,9 +54,8 @@ bool GameManager::init()
 		cout << "GameManager: already initialized" << endl;
 		return false;
 	}
-	
+
 	_dialog = new MyDialog();
-	_dialog->setGeometry(0, QApplication::desktop()->screenGeometry().height()-DIALOG_HEIGHT, DIALOG_WITDH, DIALOG_HEIGHT);
 
 	_isInizialized = true;
 
@@ -81,10 +82,14 @@ bool GameManager::start()
 	_dialog->show();
 
 	_isStarted = true;
+	
+	return true;
 }
 
 void GameManager::numPlayerSelectedSlot(int  playerNum)
 {
+	_dialog->hide();
+
 	startGame(playerNum);
 }
 
@@ -93,7 +98,6 @@ void GameManager::startGame(int playerNum)
 	if(!checkStartedStatus())
 		return;
 
-	_dialog->hide();
 
 	if(_gameStarted)
 	{
@@ -101,21 +105,29 @@ void GameManager::startGame(int playerNum)
 		return;
 	}
 
+	_gameView = new GameGridView(*this);
+
 	_game = GameFactory::createGame(*this, playerNum);
 
-	if(!_game->startGame())
-	{
-		cout << "GameManager::numPlayerSelectedSlot ERRORE in startGame = " << endl;
-		return;
-	}
+	_game->start();
+	_gameView->connectData();
 
 	connect(_game, SIGNAL(gameFinished()), this, SLOT(gameFinishedSlot()));
+
+	_gameView->show();
+
 	_gameStarted = true;
 }
 
 void GameManager::gameFinishedSlot()
 {
 	stopGame();
+	stop();
+
+	uninit();
+	
+	//NOTE: porkaround tanto per fare delle prove
+	QApplication::exit(0);
 }
 
 void GameManager::stopGame()
@@ -123,14 +135,19 @@ void GameManager::stopGame()
 	if(!checkStartedStatus())
 		return;
 
-
-	if(!_game->stopGame())
+	if(!_gameStarted)
 	{
-		cout << "GameManager::numPlayerSelectedSlot ERRORE in stopGame = " << endl;
+		cout << "GameManager::numPlayerSelectedSlot ERRORE game not started = " << endl;
 		return;
 	}
 
+	_game->stop();
+	_gameView->disconnectData();
+
 	disconnect(_game, SIGNAL(gameFinished()), this, SLOT(gameFinishedSlot()));
+
+	_gameView->hide();
+
 	_gameStarted = false;
 }
 
@@ -153,9 +170,47 @@ bool GameManager::stop()
 
 bool GameManager::uninit()
 {
-	delete _game;
+	_dialog->deleteLater();
+	_gameView->deleteLater();
+	
+	//NOTE: la uninit viene attualmente invocata a sequito di un evento generato da 
+	_game->deleteLater();
 
 	_isInizialized = false;
+	
+	deleteLater();
 
 	return true;
 }
+
+IGameView & GameManager::getView()
+{
+	return *_gameView;
+}
+
+IGame & GameManager::getGame()
+{
+	return * _game;
+}
+
+const QString GameManager::getPlayerSymbol(const QString & playerId) const
+{
+	if(!_playerMap.contains(playerId))
+	{
+		cout << "GameManager::getPlayerSymbol ERRORE player not present in map" << endl;
+		return _emptySymbol;
+	}
+	
+	return _playerMap[playerId];
+}
+
+void GameManager::addPlayerSymbol(const QString & playerId, const QString & symbol)
+{
+	if(!_playerMap.contains(playerId))
+	{
+		cout << "GameManager::getPlayerSymbol WARNING player already present in map" << endl;
+	}
+	
+	_playerMap[playerId] = symbol;
+}
+

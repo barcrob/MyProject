@@ -12,7 +12,7 @@ class QGraphicsSimpleTextItem;
 class QPainter;
 
 
-class CellGraphicItem: public QObject,  public QGraphicsRectItem
+class CellGraphicItem: public ICellItem
 {
 	Q_OBJECT
 	
@@ -23,19 +23,17 @@ class CellGraphicItem: public QObject,  public QGraphicsRectItem
 		void setSymbol(const QString symbol);
 		const QString getSymbol() const;
 		
-		//void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	  //QRectF boundingRect() const;
-
+		QGraphicsSimpleTextItem* getSymbolItem() const {return _symbol;};
+		
 	protected:
 		void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
-	Q_SIGNALS:
-		void cellSelected(int row, int col);
 
 	private:
 		QGraphicsSimpleTextItem* _symbol;
 		int _row;
 		int _col;
+		static int _count;
 };
 
 #endif // CELLGRAPHICITEM_H

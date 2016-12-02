@@ -3,8 +3,8 @@
 
 #include "IGameView.h"
 
+class GameManager;
 class ICellItem;
-class CellGraphicItem;
 
 
 class GameGridView: public IGameView
@@ -12,17 +12,22 @@ class GameGridView: public IGameView
 	Q_OBJECT
 
 	public:
-		GameGridView(const QRectF & dim);
+		GameGridView(GameManager & manager);
 		~GameGridView();
 
 		virtual void setSymbol(int row, int col, const QString symbol);
 		virtual const QString getSymbol(int row, int col) const;
 		
+		void connectData();
+		void disconnectData();
+		
 	private Q_SLOTS:
 		void cellSelectedSlot(int, int);
+		void symbolSelectedSlot(int, int, const QString &);
 
 	private:
-		CellGraphicItem* _grid[3][3];
+		ICellItem* _grid[3][3];
+		GameManager & _manager;
 };
 
 #endif // GAMEGRID_H

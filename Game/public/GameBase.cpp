@@ -1,11 +1,13 @@
 #include "GameBase.h"
+
 #include <readUtility.h>
+#include <GameManager.h>
 
 #include <iostream>
 
 GameBase::GameBase(GameManager & manager):
 IGame(manager),
-_gameView(NULL)
+_gameView(manager.getView())
 {
 
 }

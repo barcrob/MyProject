@@ -22,6 +22,11 @@
 
 #include <QtGui/QWidget>
 
+class QGroupBox;
+class QButtonGroup;
+class QGridLayout;
+class QCheckBox;
+class QLabel;
 class QComboBox;
 
 class QPushButton;
@@ -40,14 +45,21 @@ public:
 
  private Q_SLOTS:
 		void activatedSlot(int);
-		void clickedSlot();
+		void OkClickedSlot();
+		void groupClickedSlot();
 
 Q_SIGNALS:
 	void numPlayerSelected(int numPlayer);
+	void symbolChoiceSignal(const QString & playerId, const QString & symbol);
 
 private:
+	QGridLayout* _layout;
+	QLabel* _title;
 	QComboBox* _combo;
 	QPushButton* _okButton;
+	QGroupBox* _groupBox;
+	QCheckBox* _symbolX;
+	QCheckBox* _symbolO;
 	int _numPlayer;
 };
 
