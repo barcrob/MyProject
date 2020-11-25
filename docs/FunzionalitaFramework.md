@@ -1,4 +1,4 @@
-﻿
+
 
 
 ## Funzionalità del framework
@@ -29,5 +29,5 @@ Le funzionalità del framework si possono dividere in 3 macro categorie:
    demandato all’App la scelta del momento di invio dei dati verso il
    BE.
 
-[Gestione della Persistenza](docs/GestionePersistenza.md)
+[Gestione della Persistenza](GestionePersistenza.md)
 
