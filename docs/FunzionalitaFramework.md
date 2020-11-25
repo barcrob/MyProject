@@ -31,3 +31,5 @@ Le funzionalità del framework si possono dividere in 3 macro categorie:
 
 [Gestione della Persistenza](GestionePersistenza.md)
 
+[Upload dei dati](uploadDati.md)
+
