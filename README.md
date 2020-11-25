@@ -1,4 +1,3 @@
-MyProject
-=========
+﻿# Documentazione
 
-test project for first use of Github
+Questo è un link di [prova](FilePuntato.md)
