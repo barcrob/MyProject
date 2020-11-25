@@ -1,3 +1,3 @@
-﻿# Documentazione
+# Documentazione
 
-Questo è un link di [prova](FilePuntato.md)
+Questo è un link di [prova](docs/FilePuntato.md)
