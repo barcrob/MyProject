@@ -1,5 +1,5 @@
 ﻿
-## Gestione dei dati e pulizia della persistenza
+## GESTIONE DEI DATI E PULIZIA DELLA PERSISTENZA 
 Il framework raccoglie e persiste dati sul file system rendendoli disponibili al chiamante per l'utilizzo nello specifico contesto applicativo (esempio: visualizzazione a video, invio verso sistemi di BE, ecc...); la cancellazione della persistenza dei dati (file su disco e strutture dati negli UserDefaults) generati dal framework è interamente demandata all'applicativo. In questo modo sarà l'applicativo a decidere quando richiedere i dati e a gestirne la relativa cancellazione. 
 
 Per quanto riguarda in particolare il file system, il framework crea una sottocartella della directory Documents del dispositivo, il cui nome è configurabile. A tal fine è necessario impostare la seguente property della classe `PIMRTDDataHelper`:
@@ -206,12 +206,14 @@ Di seguito le firme dei metodi di cui sopra:
     -(NSString *) getMRZ;
     -(void) deleteMRZ;
 
-La tipologia di documento elettronico viene rappresentata come una stringa che può assumente i seguenti valori:
+La tipologia di documento elettronico viene rappresentata come una stringa. Indica il tipo di documento, ma anche l'utilizzo nell'ambito del processo di identificazione dell'utente. Può pertanto assumere i seguenti valori:
 
  - “*ci*” per la carta d’identità cartacea,
- - “*cie*” per la carta d’identità elettronica nel flusso senza uso del PIN,
- - “*cie-pin*" per la carta d’identità elettronica nel flusso che prevede l’uso del PIN,
- - “*pe*” per il passaporto elettronico
+ - “*cie*” per la carta d’identità elettronica con lettura dei dati del chip senza uso del PIN,
+ - “*cie-pin*" per la carta d’identità elettronica con lettura dei dati del chip  tramite l’uso del PIN,
+ - “*pe*” per il passaporto elettronico con lettura dei dati nel chip,
+ - “*pe-cart*” per il passaporto elettronico senza lettura dei dati nel chip (come ad es. nel flusso di riconoscimento con bonifico nell'app PosteID)
+ - “*cie-cart*” per il passaporto elettronico senza lettura dei dati nel chip (come ad es. nel flusso di riconoscimento con bonifico nell'app PosteID)
 
 Per la gestione di questo dato la classe `PIMRTDDataHelper`  mette a disposizione i seguenti metodi:
 
