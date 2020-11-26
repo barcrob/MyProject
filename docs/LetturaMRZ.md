@@ -7,7 +7,7 @@ E’ importante ricordare che nonostante il framework supporti sistemi operativi
 
 Per un corretto funzionamento di questa funzionalità del framework occorre anche inserire nel file plist dell’applicativo la seguente entry:
 
-![MRZPermissionPlist](MRZPermissionPlist.png)
+![MRZPermissionPlist](images/MRZPermissionPlist.png)
 
 	<key>NSCameraUsageDescription</key>
 	<string>Consenti l&apos;accesso per poter inquadrare il QR Code</string>
