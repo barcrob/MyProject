@@ -6,7 +6,7 @@ Questa funzionalità permette all’utente di registrare un video in modalità l
 
 Per un corretto funzionamento di questa funzionalità del framework occorre inserire nel file plist dell’applicativo la seguente entry:
 
-![MicrophoneUsageDescription](MicrophoneUsageDescription.png)
+![MicrophoneUsageDescription](images/MicrophoneUsageDescription.png)
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Consenti l&apos;accesso al microfono</string>
 

@@ -7,7 +7,7 @@ Questa funzionalità permette all’applicativo di acquisire l’immagine di un 
 
 Per un corretto funzionamento di questa funzionalità del framework occorre inserire nel file plist dell’applicativo la seguente entry:
 
-![CameraUsageDescription](CameraUsageDescription.png)
+![CameraUsageDescription](images/CameraUsageDescription.png)
 
 	<key>NSCameraUsageDescription</key>
 	<string>Consenti l&apos;accesso per poter inquadrare il QR Code</string>

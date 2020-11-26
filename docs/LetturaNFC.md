@@ -7,14 +7,14 @@ E’ importante ricordare che nonostante il framework supporti sistemi operativi
 
 Inoltre è necessario specificare nel file plist dell’applicativo le seguenti entries:
 
-![A0000002471001](A0000002471001.png)
+![A0000002471001](images/A0000002471001.png)
 
     <key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
     <array>
     	<string>A0000002471001</string>
     </array>
 
-![NFCPermissionUsage](NFCPermissionUsage.png)
+![NFCPermissionUsage](images/NFCPermissionUsage.png)
 
     <key>NFCReaderUsageDescription</key>
     <string>Consenti l&apos;accesso per poter rilevare tag NFC</string>
@@ -24,7 +24,7 @@ Dove la stringa che rappresenta il valore della chiave `NFCReaderUsageDescriptio
 
 Inoltre nel file entitlements dell’applicativo devono essere presenti le seguenti entry:
 
-![NearFieldCommunicationTag](NearFieldCommunicationTag.png)
+![NearFieldCommunicationTag](images/NearFieldCommunicationTag.png)
 	
 
     <key>com.apple.developer.nfc.readersession.formats</key>
@@ -40,7 +40,7 @@ Lato Apple Developer Center vanno configurati i seguenti aspetti:
 
 Nella sezione *Identifiers*, in corrispondenza dell‘App ID corrispondente al bundle id dell’applicativo, nella sezione *Capabilities* va abilita la voce *NFC Tag Reading*
 
- ![NFCCapability](NFCCapability.png)
+ ![NFCCapability](images/NFCCapability.png)
  
 Infine occorre rigenerare il provisioning profile in modo da includere la nuova Capability.
 
