@@ -60,21 +60,21 @@ Al fine di garantire l’invio della foto appena scattata verso il back-end nell
 
 Nel caso di immagini ospitate su azure l’oggetto `PIImageMatch` dovrà essere istanziato con i seguenti parametri: 
 
- - *ResourceType*: `AZURE`
+ - *ResourceType*: `AZURE`, valore dell'enumerato `ResourceType`
  - *Description*: stringa descrittiva del file, opzionale
  - *hash*: l’hash del file
  - *file*: il token azure
 
 Nel caso di immagini ospitate sul cloud l’oggetto `PIImageMatch` dovrà essere istanziato con i seguenti parametri: 
 
- - *ResourceType*: URI
+ - *ResourceType*: URI, valore dell'enumerato `ResourceType`
  - *Description*: stringa descrittiva del file, opzionale
  - *hash*: l’hash del file immagine PRIMA del caricamento sul cloud
  - *file*: il link alla risorsa sul cloud
 
 Nel caso di immagini sul quale deve essere eseguito l’upload sul sistema di BE collegato alla libreria (jod-electroinc-id BE) l’oggetto `PIImageMatch` dovrà essere istanziato con i seguenti parametri: 
 
- - *ResourceType*: LOCAL
+ - *ResourceType*: LOCAL, valore dell'enumerato `ResourceType`
  - *Description*: stringa descrittiva del file, opzionale
  - *hash*: l’hash del file
  - *file*: il path al file system restituito dal `PIFaceDetectionViewController`
