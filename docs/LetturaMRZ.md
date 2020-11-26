@@ -3,7 +3,7 @@
 # Lettura OCR dell’MRZ
 
 ## Prerequisiti
-E’ importante ricordare che nonostante il framework supporti sistemi operativi pari o successivi alla versione *iOS 9*, questa funzionalità richiede almeno una versione *iOS 10* per poter essere eseguita.
+E’ importante ricordare che nonostante il framework supporti sistemi operativi pari o successivi alla versione *iOS 9*, questa funzionalità richiede almeno una versione ***iOS 10*** per poter essere eseguita.
 
 Per un corretto funzionamento di questa funzionalità del framework occorre anche inserire nel file plist dell’applicativo la seguente entry:
 
