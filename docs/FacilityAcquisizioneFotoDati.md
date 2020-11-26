@@ -9,5 +9,8 @@ TODO: inserire un cappello introduttivo
 
 [Acquisizione della foto del documento cartaceo](AcquisizioneFotoDocumentoCartaceo.md)
 
+[ Lettura OCR dell'MRZ ed NFC sul documento elettronico](LetturaOCReNFC.md)
+
+
 
 
