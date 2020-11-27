@@ -58,7 +58,7 @@ La classe PIMRTDDataHelper gestisce sia il salvataggio di dati in persistenza si
 
  <div id='title3'/>
  
-## Gestione dati con persistenza
+## GESTIONE DATI CON PERSISTENZA
 
  <div id='title4'/>
  
@@ -291,7 +291,7 @@ Di seguito le firme dei metodi di cui sopra:
 
  <div id='title9'/>
  
-## Gestione dati non persistenti
+## GESTIONE DATI NON PERSISTENTI
 La classe `PIMRTDDataHelper` espone inoltre le seguenti properties da settare durante il ciclo di vita dell’App: 
 
  - *eidPubKeyB64*: la chiave pubblica codificata in base 64 del BE jod-electroinc-id, necessaria per l’upload dei dati verso lo stesso
@@ -301,7 +301,7 @@ La classe `PIMRTDDataHelper` espone inoltre le seguenti properties da settare du
 
  <div id='title10'/>
  
-## Metodi di utility
+## METODI DI UTILITY
 La classe `PIMRTDDataHelper` espone il seguente metodo di utility:
 
      -(NSString *) getCodeAppChallenge;
