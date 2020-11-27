@@ -1,26 +1,26 @@
 
 
 ## Indice
-[GESTIONE DEI DATI E PULIZIA DELLA PERSISTENZA](#title1)
+1. [GESTIONE DEI DATI E PULIZIA DELLA PERSISTENZA](#title1)
 
-    [La classe PIMRTDDataHelper: gestione dei dati](#title2)
+    1.1 [La classe PIMRTDDataHelper: gestione dei dati](#title2)
 
-[GESTIONE DATI CON PERSISTENZA](#title3)
+2. [GESTIONE DATI CON PERSISTENZA](#title3)
 
-    [Gestione delle strutture dati relative alle immagini acquisite](#title4)
+    2.1 [Gestione delle strutture dati relative alle immagini acquisite](#title4)
 
-    [Gestione delle strutture dati relative al chip del documento elettronico](#title5)
+    2.2 [Gestione delle strutture dati relative al chip del documento elettronico](#title5)
 
-    [Gestione dei dati relativi all'anagrafica](#title6)
+    2.3 [Gestione dei dati relativi all'anagrafica](#title6)
 
-    [Gestione dei dati relativi a MRZ, tipo di documento elettronico, accessToken](#title7)
+    2.4 [Gestione dei dati relativi a MRZ, tipo di documento elettronico, accessToken](#title7)
 
-    [Gestione persistenza generale](#title8)
+    2.5 [Gestione persistenza generale](#title8)
 
-[GESTIONE DATI NON PERSISTENTI](#title9)
+3. [GESTIONE DATI NON PERSISTENTI](#title9)
 
 
-[METODI DI UTILITY](#title10)
+4. [METODI DI UTILITY](#title10)
 
 
  
