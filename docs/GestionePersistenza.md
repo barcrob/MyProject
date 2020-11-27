@@ -1,4 +1,30 @@
 ﻿
+
+## Indice
+1. [GESTIONE DEI DATI E PULIZIA DELLA PERSISTENZA](#title1)
+1.1 [La classe PIMRTDDataHelper: gestione dei dati](#title2)
+
+2. [GESTIONE DATI CON PERSISTENZA](#title3)
+2.1 [Gestione delle strutture dati relative alle immagini acquisite](#title4)
+2.2 [Gestione delle strutture dati relative al chip del documento elettronico](#title5)
+2.3 [Gestione dei dati relativi all'anagrafica](#title6)
+2.4 [Gestione dei dati relativi a MRZ, tipo di documento elettronico, accessToken](#title7)
+2.5 [Gestione persistenza generale](#title8)
+
+3. [GESTIONE DATI NON PERSISTENTI](#title9)
+
+
+4. [METODI DI UTILITY](#title10)
+
+
+ 
+
+
+
+
+
+ <div id='title1'/>
+ 
 ## GESTIONE DEI DATI E PULIZIA DELLA PERSISTENZA 
 Il framework raccoglie e persiste dati sul file system rendendoli disponibili al chiamante per l'utilizzo nello specifico contesto applicativo (esempio: visualizzazione a video, invio verso sistemi di BE, ecc...); la cancellazione della persistenza dei dati (file su disco e strutture dati negli UserDefaults) generati dal framework è interamente demandata all'applicativo. In questo modo sarà l'applicativo a decidere quando richiedere i dati e a gestirne la relativa cancellazione. 
 
@@ -15,16 +41,22 @@ Di seguito sono riportati alcuni esempi di possibili momenti in cui eseguire le 
  - cancellazione dati alla fine dell’upload verso il BE
  - cancellazione puntuale dei dati acquisiti (solo video, solo foto, ecc…). Ad esempio se l’utente decide di procedere ad una nuova acquisizione dello stesso dato, al fine di evitare la duplicazione dello stesso occorre cancellare la precedente acquisizione
 
-## La classe PIMRTDDataHelper: gestione dei dati
+ <div id='title2'/>
+ 
+### La classe PIMRTDDataHelper: gestione dei dati
 La classe singleton `PIMRTDDataHelper` ha il compito di mantenere i riferimenti alle strutture dati, file, e informazioni create dalla libreria durante il suo utilizzo e fornire dei metodi per la gestione della persistenza dei dati da essa raccolti. La persistenza viene garantita tramite il salvataggio delle strutture dati negli UserDefaults, ciascuna con una specifica chiave.
 
 I riferimenti in tal modo creati dalla classe `PIMRTDDataHelper` alle risorse (foto e altre informazioni di seguito descritte) verranno utilizzate dallo stesso framework per la creazione del file compresso da inviare in upload al back-end.
 
 La classe PIMRTDDataHelper gestisce sia il salvataggio di dati in persistenza sia la memorizzazione di alcuni dati non persistenti.
 
-### Gestione dati con persistenza
+ <div id='title3'/>
+ 
+## Gestione dati con persistenza
 
-#### Gestione delle strutture dati relative alle immagini acquisite
+ <div id='title4'/>
+ 
+### Gestione delle strutture dati relative alle immagini acquisite
 Per la gestione delle informazioni relative alle immagini acquisite il framework utilizza delle apposite strutture dati di cui è garantita la persistenza (tramite salvataggio negli *UserDefaults*).
 
 In particolare la classe  `PIImageMatch` viene utilizzata per contenere le informazioni relative alla foto dell’utente (*selfie*). 
@@ -69,7 +101,9 @@ Di seguito le firme dei metodi di cui sopra:
     -(void) deleteDataCartPIImage;
 
 
-#### Gestione delle strutture dati relative al chip del documento elettronico
+ <div id='title5'/>
+ 
+### Gestione delle strutture dati relative al chip del documento elettronico
 
 Per la gestione della persistenza delle strutture dati relative al chip del documento elettronico la classe `PIMRTDDataHelper` mette a disposizione i seguenti metodi:
 
@@ -163,8 +197,9 @@ Di seguito le firme dei metodi sopra elencati:
     -(void) deleteCIECertificateSignedChallenge;
 
 
-
-#### Gestione dei dati relativi all’anagrafica
+ <div id='title6'/>
+ 
+### Gestione dei dati relativi all'anagrafica
 La classe `PIMRTDDataHelper` espone anche metodi per gestire la persistenza dei dati relativi al nome, al cognome e al codice fiscale dell’utente. Tali dati sono raccolti all’interno di un’unica classe `PIAnagraficaModel`. Tale classe può essere istanziata  tramite il seguente metodo:
 
     -(instancetype) initWithName:(nonnull NSString *)name surname:(nonnull NSString *)surname fiscalCode:(nonnull NSString*)fiscalCode
@@ -189,8 +224,9 @@ Di seguito le firme dei metodi sopra elencati:
     -(void) deleteAnagrafica;
 
 
-
-#### Gestione dei dati relativi a MRZ, tipo di documento elettronico, accessToken
+ <div id='title7'/>
+ 
+### Gestione dei dati relativi a MRZ, tipo di documento elettronico, accessToken
 
 La classe `PIMRTDDataHelper` espone anche metodi per gestire la persistenza dei dati relativi all’MRZ, alla tipologia di documento elettronico, all’accessToken.
 
@@ -213,7 +249,7 @@ La tipologia di documento elettronico viene rappresentata come una stringa. Indi
  - “*cie-pin*" per la carta d’identità elettronica con lettura dei dati del chip  tramite l’uso del PIN,
  - “*pe*” per il passaporto elettronico con lettura dei dati nel chip,
  - “*pe-cart*” per il passaporto elettronico senza lettura dei dati nel chip (come ad es. nel flusso di riconoscimento con bonifico nell'app PosteID)
- - “*cie-cart*” per il passaporto elettronico senza lettura dei dati nel chip (come ad es. nel flusso di riconoscimento con bonifico nell'app PosteID)
+ - “*cie-cart*” per la carte d'identità elettronica senza lettura dei dati nel chip (come ad es. nel flusso di riconoscimento con bonifico nell'app PosteID)
 
 Per la gestione di questo dato la classe `PIMRTDDataHelper`  mette a disposizione i seguenti metodi:
 
@@ -241,12 +277,15 @@ Di seguito le firme dei metodi di cui sopra:
     -(NSString *) getAccessToken;
     -(void) deleteAccessToken;
 
-
-#### Gestione persistenza generale 
+ <div id='title8'/>
+ 
+### Gestione persistenza generale 
 
  - deleteAllData: cancella TUTTE le strutture dati memorizzate in persistenza sulla libreria, tranne quelle relative al flusso di lettura della carta d’identità elettronica tramite PIN. Più precisamente questo metodo rimuove tutti gli oggetti di tipo PIImageMatch, di tipo PIImage, le strutture dati relative al contenuto del chip del documento elettronico (DG1, DG2, DG11, DG12, SODB), accessToken e docType  deleteCiePinData: cancella tutte le strutture dati memorizzate in persistenza relative al flusso di lettura della carta d’identità elettronica tramite PIN.
 
-### Gestione dati non persistenti
+ <div id='title9'/>
+ 
+## Gestione dati non persistenti
 La classe `PIMRTDDataHelper` espone inoltre le seguenti properties da settare durante il ciclo di vita dell’App: 
 
  - *eidPubKeyB64*: la chiave pubblica codificata in base 64 del BE jod-electroinc-id, necessaria per l’upload dei dati verso lo stesso
@@ -254,8 +293,9 @@ La classe `PIMRTDDataHelper` espone inoltre le seguenti properties da settare du
 
 **N.B**. per questi attributi non viene gestita alcuna persistenza. 
 
-
-### Metodi di utility
+ <div id='title10'/>
+ 
+## Metodi di utility
 La classe `PIMRTDDataHelper` espone il seguente metodo di utility:
 
      -(NSString *) getCodeAppChallenge;
