@@ -13,6 +13,12 @@
 
 | Attività | Data | Tipo | Note |
 |----------|------|------|------|
-|    Implementazione requisiti bonifico      |    11/01/2021  |  Release    |      |
+|   Requisiti bonifico      |    11/01/2021  |  Release    |      |
+
+# 2.3.1
+
+| Attività | Data | Tipo | Note |
+|----------|------|------|------|
+|    Fix documentazione      |    11/01/2021  |  Release    |      |
 
 
