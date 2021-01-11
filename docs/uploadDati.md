@@ -1,4 +1,4 @@
-﻿
+
 
 
 ## UPLOAD DEI DATI
@@ -26,13 +26,12 @@ Questo vuol dire che l’esito del processo di updoad è comunicato all’applic
 
 I possibili codici di errore sono i seguenti:
 
-| Codice | Descrizione |
-|--|--|
-| 10000 |  Mancata valorizzazione di un parametro mandatario (eidPubKeyB64 o eidAzCodeB64Error o codeVerify)|
-| 10008 |  Mancata valorizzazione del parametro docType|
-| 10005 |  Errore nella creazione dello zip|
-| 10006 |  Errore nella cifratura dello zip|
-| 10007 | Errore generico|
+ - *10000*: Mancata valorizzazione di un parametro mandatario (eidPubKeyB64 o eidAzCodeB64Error o codeVerify)
+ - *10008*: Mancata valorizzazione del parametro docType
+ - *10005*: Errore nella creazione dello zip
+ - *10006*: Errore nella cifratura dello zip
+ - *10007*: Errore generico
+
 
 
 Per poter effettuare l'upload verso il sistema EID è necessario seguire i seguenti passi:
