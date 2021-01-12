@@ -1,4 +1,4 @@
-﻿
+
 
 # Acquisizione foto utente (selfie) mediante FaceDetection
 
@@ -29,7 +29,7 @@ La property `faceDetectedText` ha la priorità rispetto alla property `faceDetec
 
     - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    	PIFaceDetectionViewController *faceDetectionController = (PIVideoCamera *) [segue destinationViewController];
+    	PIFaceDetectionViewController *faceDetectionController = (PIFaceDetectionViewController *) [segue destinationViewController];
     	faceDetectionController.delegate = self;
     
     	faceDetectionController.faceDetectedTextAttributed = customTextAttributedString;
@@ -42,7 +42,7 @@ Il processo di acquisizione della foto utente si divide in due parti:
 
 ## Acquisizione della foto
 
-Per acquisire la foto utente (selfie) è necessario caricare il viewController adibito al scatto della foto mediante fotocamera frontale. Per caricare il controller: 
+Per acquisire la foto utente (selfie) è necessario caricare il viewController adibito allo scatto della foto mediante fotocamera frontale. Per caricare il controller: 
 
  1. Linkare lo storyboard PIFaceDetection su un’action (esempio: pulsante), oppure istanziare lo storyboard PIFaceDetection con il metodo `[UIStoryboard` `storyboardWithName`:… `bundle`:…]` utilizzando il
     *bundle it.poste.mrtdframework.posteMRTDFramework*
@@ -86,7 +86,7 @@ Nel caso di immagini sul quale deve essere eseguito l’upload sul sistema di BE
             if (path) {
                 NSString * fileHash = [PIFileManager getHashSHA256FileAtPath:path];
                 PIImageMatch * imageMatch = [[PIImageMatch alloc]initWithResourceType:LOCAL description:@"Selfie" hash:fileHash file:path];
-                [[PIMRTDDataHelper sharedInstance]addImageMatch:imageMatch];
+                [[PIMRTDDataHelper sharedInstance]addPIImageMatch:imageMatch];
             }
         ...
     }
@@ -98,7 +98,7 @@ Nel caso di immagini sul quale deve essere eseguito l’upload sul sistema di BE
         if (path) {
             NSString * fileHash = [PIFileManager getHashSHA256FileAtPath:path];
             PIImageMatch * imageMatch = [[PIImageMatch alloc]initWithResourceType:URI description:@"Selfie" hash:fileHash file:@"https://link_a_una_risorsa_su_cloud"];
-            [[PIMRTDDataHelper sharedInstance]addImageMatch:imageMatch];
+            [[PIMRTDDataHelper sharedInstance]addPIImageMatch:imageMatch];
         }
         ...
     }
