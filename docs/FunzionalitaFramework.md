@@ -22,7 +22,7 @@ Le funzionalità del framework si possono dividere in 3 macro categorie:
    all’occorrenza e in base al contesto progettuale mediante il
    componente PIMRTDDataHelper.
    
- - [Upload dei dati](uploadDati.md)i verso il BE jod-electronic-id: alla fine del flusso
+ - [Upload dei dati](uploadDati.md) verso il BE jod-electronic-id: alla fine del flusso
    di acquisizione dati sarà possibile utilizzare il framework per
    eseguire un upload di tali dati verso il BE jod-electronic-id. E’
    demandato all’App la scelta del momento di invio dei dati verso il
