@@ -17,6 +17,10 @@
 
 using namespace std;
 
+//COMMENTO PER PROVA GIT
+
+
+
 //TODO: non più necessario, causa interfaccia grafica
 // bool manageEndSession()
 // {
