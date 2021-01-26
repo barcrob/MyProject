@@ -25,6 +25,6 @@
 
 | Attività | Data | Tipo | Note |
 |----------|------|------|------|
-|    Aggiunta configurabilità bottone VideoRecorder      |    26/01/2021  |  Release    |      |
+|    Aggiunta property di configurazione del bottone back del VideoRecorder      |    26/01/2021  |  Release    |      |
 
 
