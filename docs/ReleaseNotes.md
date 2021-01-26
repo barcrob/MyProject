@@ -21,4 +21,10 @@
 |----------|------|------|------|
 |    Fix documentazione      |    11/01/2021  |  Release    |      |
 
+# 2.3.2
+
+| Attività | Data | Tipo | Note |
+|----------|------|------|------|
+|    Aggiunta configurabilità bottone VideoRecorder      |    26/01/2021  |  Release    |      |
+
 
