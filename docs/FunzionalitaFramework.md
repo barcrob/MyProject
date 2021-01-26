@@ -5,13 +5,7 @@
 Le funzionalità del framework si possono dividere in 3 macro categorie:
 
  
- - [Utilizzo della facility](FacilityAcquisizioneFotoVideoDati.md)  di acquisizione della foto utente, scansione della banda MRZ del documento tramite
-          tecnologia OCR, lettura del chip del documento elettronico
-          tramite tecnologia NFC e registrazione di un video. Il risultato
-          di queste funzionalità sono file immagini e video salvati
-          all’interno della cartella Documents del dispositivo e strutture
-          dati relative alle informazioni contenute nel documento
-          elettronico
+ - [Utilizzo della facility](FacilityAcquisizioneFotoVideoDati.md)  di acquisizione della foto utente, scansione della banda MRZ del documento tramite tecnologia OCR, lettura del chip del documento elettronico tramite tecnologia NFC e registrazione di un video. Il risultato di queste funzionalità sono file immagini e video salvati all’interno della cartella Documents del dispositivo e strutture dati relative alle informazioni contenute nel documento elettronico
 
 
 

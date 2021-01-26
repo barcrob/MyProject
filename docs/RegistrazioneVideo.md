@@ -1,4 +1,4 @@
-﻿
+
 # Registrazione di un video 
 Questa funzionalità permette all’utente di registrare un video in modalità live, cioè vedendo in tempo reale sul dispositivo la preview di quanto sta registrando. La durata della registrazione è configurabile, con un valore di default di 7 secondi.
 
@@ -38,6 +38,7 @@ Grazie ad alcune properties esposte dal framework l’applicativo può  configur
  - *videoTextAttributed*, di tipo NSAttributedString: permette di
    impostare un titolo formattato
  - *bottomVideoTextImage*, di tipo UIImage: permette di impostare un’immagine da mostrare come sfondo della stringa `videoText` o `videoTextAttributed`
+ - *backButtonHidden*, di tipo BOOL: il valore di defualt è false, se impostato esplicitamente a true permette di nascondere il bottone di back
 
 **N.B.** Il valore impostato sull’attributo `videoText` ha la precedenza su `videoTextAttributed`.
 
