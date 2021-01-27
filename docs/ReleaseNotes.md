@@ -27,4 +27,10 @@
 |----------|------|------|------|
 |    Aggiunta property di configurazione del bottone back del VideoRecorder      |    26/01/2021  |  Release    |      |
 
+# 2.3.3
+
+| Attività | Data | Tipo | Note |
+|----------|------|------|------|
+|    Aggiunta property di configurazione del bottone back del Selfie      |    27/01/2021  |  Release    |      |
+
 

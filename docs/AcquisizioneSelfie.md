@@ -1,4 +1,4 @@
-﻿
+
 
 # Acquisizione foto utente (selfie) mediante FaceDetection
 
@@ -20,6 +20,7 @@ Il controller espone alcune properties che permettono di customizzare l’aspett
  - `faceDetectedText`: di tipo NSString, permette di impostare un titolo non formattato
  - `faceDetectedTextAttributed`: di tipo NSAttributedString, permette di impostare un titolo formattato
  - `faceDetectedColor`: di tipo UIColor, permette di impostare il colore assunto dall’ovale in tutti gli istanti in cui vengono riconosciuti i tratti di un volto nell’immagine inquadrata; il valore di default è verde
+ - `backButtonHidden`: di tipo BOOL, il valore di default è false, se impostato esplicitamente a true permette di nascondere il bottone di back
 
 La property `faceDetectedText` ha la priorità rispetto alla property `faceDetectedTextAttributed`.
 
