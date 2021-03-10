@@ -37,6 +37,6 @@
 
 | Attività | Data | Tipo | Note |
 |----------|------|------|------|
-|    Aggiunta fix per rilascio con XCode12       |    11/03/2021  |  Beta    |      |
+|    Aggiunta fix per rilascio con XCode12       |    11/03/2021  |  Beta    |   Da non usare in produzione, utilizzata solo per verificare il rilascio con XCode 12   |
 
 
