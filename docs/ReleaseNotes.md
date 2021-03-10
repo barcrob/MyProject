@@ -33,4 +33,10 @@
 |----------|------|------|------|
 |    Aggiunta property di configurazione del bottone back del Selfie      |    27/01/2021  |  Release    |      |
 
+# 2.3.4-beta.1
+
+| Attività | Data | Tipo | Note |
+|----------|------|------|------|
+|    Aggiunta fix per rilascio con XCode12       |    11/03/2021  |  Beta    |      |
+
 
