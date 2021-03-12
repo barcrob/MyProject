@@ -45,4 +45,9 @@
 |----------|------|------|------|
 |    Modifica alla fix per rilascio con XCode12       |    11/03/2021  |  Beta    |   Da non usare in produzione, utilizzata solo per verificare il rilascio con XCode 12   |
 
+# 2.3.4-beta.3
+
+| Attività | Data | Tipo | Note |
+|----------|------|------|------|
+|    Ulteriore Modifica alla fix per rilascio con XCode12       |    12/03/2021  |  Beta    |   Da non usare in produzione, utilizzata solo per verificare il rilascio con XCode 12   |
 
